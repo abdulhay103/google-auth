@@ -24,7 +24,7 @@ export default function Login() {
       const res = await fetch("api/login", config);
       const json = await res.json();
 
-      if (json[status] === true) {
+      if (json["status"] === true) {
         router.replace("/dashboard");
       } else {
         alert(json["msg"]);
