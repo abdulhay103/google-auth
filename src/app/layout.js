@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-50">
         <Header />
-        <div className="container mx-auto py-10 text-center">{children}</div>
+        <div className="container mx-auto py-10">{children}</div>
       </body>
     </html>
   );
