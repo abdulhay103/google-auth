@@ -1,3 +1,4 @@
+import { Header } from "./components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -11,8 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div>{children}</div>
+      <body className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-50">
+        <Header />
+        <div className="container mx-auto py-10 text-center">{children}</div>
       </body>
     </html>
   );
