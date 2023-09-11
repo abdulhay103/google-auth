@@ -1,3 +1,4 @@
+import { TokenCookie } from "@/app/utils/TokenCookie";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -6,13 +7,21 @@ export async function POST(req) {
   let password = JsonBody["password"];
 
   if (email && password) {
-    return NextResponse.json({
-      status: true,
-      msg: "Login Success",
-    });
+    let tokenCookie = TokenCookie(email);
+    console.log(tokenCookie.toString());
+    return NextResponse.json(
+      {
+        status: true,
+        msg: "Login Success",
+      },
+      { headers: { tokenCookie } }
+    );
   } else {
-    return NextResponse.json({
-      msg: "Login Fail",
-    });
+    return NextResponse.json(
+      {
+        msg: "Login Fail",
+      },
+      { status: 401 }
+    );
   }
 }
