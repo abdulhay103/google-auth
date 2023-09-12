@@ -1,7 +1,7 @@
-import { cookie } from "next/headers";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 export function GET(req) {
-  cookie().delete("token");
+  cookies().delete("token");
 
   return NextResponse.json({
     status: true,

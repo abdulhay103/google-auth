@@ -1,9 +1,8 @@
-import { CreateToken } from "./jwTokenKit";
+import { CreateToken } from "./JWTokenKit";
 
 export async function TokenCookie(email) {
   let token = await CreateToken(email);
   return {
-    // "Set-Cookie": `token=${token}; Path=/; HttpOnly; Max-Age=7200; SameSite=Strict`,
-    "Set-Cookie": `token=${token}; Path=/`,
+    "Set-Cookie": `token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=3600`,
   };
 }
