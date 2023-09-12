@@ -5,12 +5,9 @@ export async function POST(req) {
   const JsonBody = await req.json();
   let email = JsonBody["email"];
   let password = JsonBody["password"];
-  console.log(email);
-  console.log(password);
 
   if (email && password) {
     let tokenCookie = await TokenCookie(email);
-    console.log(tokenCookie);
     return NextResponse.json(
       {
         status: true,
