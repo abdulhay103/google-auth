@@ -8,6 +8,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onChangeHandler = (name, value) => {
@@ -15,19 +16,26 @@ export default function Login() {
   };
   const emailAuth = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (inputsValue.email.length === 0) {
       alert("Email Required");
     } else if (inputsValue.password.length === 0) {
       alert("Password Required");
     } else {
-      const config = { method: "POST", body: JSON.stringify(inputsValue) };
-      const res = await fetch("api/login", config);
-      const json = await res.json();
+      try {
+        const config = { method: "POST", body: JSON.stringify(inputsValue) };
+        const res = await fetch("api/login", config);
+        const json = await res.json();
 
-      if (json["status"] === true) {
-        router.replace("/dashboard");
-      } else {
-        alert(json["msg"]);
+        if (json["status"] === true) {
+          router.replace("/dashboard");
+          setLoading(false);
+        } else {
+          alert(json["msg"]);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setLoading(false);
       }
     }
   };
@@ -62,8 +70,11 @@ export default function Login() {
           />
         </div>
         <div className="my-5">
-          <button className="py-2 px-6 bg-white hover:bg-sky-400 border rounded mx-auto block text-sky-500 hover:text-white font-semibold">
-            Login
+          <button
+            className="py-2 px-6 bg-white hover:bg-sky-400 border rounded mx-auto block text-sky-500 hover:text-white font-semibold disabled:hover:bg-white disabled:hover:text-slate-300 disabled:text-slate-300"
+            disabled={loading || !inputsValue.email || !inputsValue.password}
+          >
+            {loading ? "Please Wait.." : "Submit"}
           </button>
         </div>
       </form>
