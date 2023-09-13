@@ -1,3 +1,5 @@
+"use client";
+import { SessionProvider } from "next-auth/react";
 import { Header } from "./components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
@@ -13,8 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-50">
-        <Header />
-        <div className="container mx-auto py-10">{children}</div>
+        <SessionProvider>
+          <Header />
+          <div className="container mx-auto py-10">{children}</div>
+        </SessionProvider>
       </body>
     </html>
   );

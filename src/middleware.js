@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { UserAuthCheck } from "./app/utils/MiddlewareHelper";
 
 export async function middleware(req) {
